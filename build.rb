@@ -20,7 +20,7 @@ def build_page(pagename:, title:, outfile: nil, headinsert: '', frontpage: false
 
   page = ERB.new(File.read('template.erb'))
   res = page.result_with_hash(parms)
-  outfile = "pages/#{pagename}.htm" unless outfile
+  outfile ||= "pages/#{pagename}.htm"
   File.write(outfile, res)
 end
 
@@ -58,29 +58,28 @@ build_page(pagename: 'links', title: 'Limpidity: Links')
 build_page(pagename: 'contact', title: 'Limpidity: Contact Info')
 
 current, archive = parse_data
-low = archive.map { |v| v[0] }.min
-high = archive.map { |v| v[0] }.max
+low, high = archive.map { |v| v[0] }.minmax
 
 build_page(pagename: 'archives', title: 'Limpidity: Archives', content_parms: { archive: })
 
 archive.each { |(num, title)|
   headinsert = ''
 
-  goleft = "&nbsp;";
+  goleft = '&nbsp;'
   if num > low
     prev = num - 1
-    goleft = "<a href=\"show#{prev}.htm\">Previous</a>";
-    headinsert += "<link rel=\"Prev\" href=\"show#{prev}.htm\" title=\"Previous Strip\" />\n";
+    goleft = "<a href=\"show#{prev}.htm\">Previous</a>"
+    headinsert += "<link rel=\"Prev\" href=\"show#{prev}.htm\" title=\"Previous Strip\" />\n"
   end
 
-  goright = "&nbsp;";
+  goright = '&nbsp;'
   if num < high
-    nnext = num + 1;
+    nnext = num + 1
     goright = "<a href=\"show#{nnext}.htm\">Next</a>"
     headinsert += "<link rel=\"Next\" href=\"show#{nnext}.htm\" title=\"Next Strip\" />\n"
   end
 
-  fname = sprintf('strips/limps%02d.gif', num)
+  fname = format('strips/limps%02d.gif', num)
   parms = {
     num:,
     title:,

@@ -7,7 +7,7 @@ require 'fastimage'
 
 EMAIL = 'morton@mortonfox.com'
 
-def build_page(pagename, headinsert, title, frontpage, content_parms={})
+def build_page(pagename:, title:, headinsert: '', frontpage: false, content_parms: {})
   content = ERB.new(File.read("#{pagename}.erb")).result_with_hash(content_parms)
 
   parms = {
@@ -28,11 +28,32 @@ def get_image_size(fname)
   "width-\"#{w}\" height=\"#{h}\""
 end
 
-# puts get_image_size('pages/img/gwally.gif')
+def parse_data
+  current = []
+  archive = []
 
-build_page('about', '', 'About Limpidity', false)
-build_page('inprint', '', 'Limpidity in print', false)
-build_page('links', '', 'Limpidity: Links', false)
-build_page('contact', '', 'Limpidity: Contact Info', false)
+  in_current = true
+
+  file = File.new('limpdata')
+  file.each_line { |line|
+    if line =~ /^archives/i
+      in_current = false
+      next
+    end
+    num, _, title = line.chomp.split(nil, 3)
+    num = num.to_i
+    current << [num, title] if in_current
+    archive << [num, title]
+  }
+  [current, archive]
+end
+
+# puts get_image_size('pages/img/gwally.gif')
+# pp parse_data
+
+build_page(pagename: 'about', title: 'About Limpidity')
+build_page(pagename: 'inprint', title: 'Limpidity in print')
+build_page(pagename: 'links', title: 'Limpidity: Links')
+build_page(pagename: 'contact', title: 'Limpidity: Contact Info')
 
 __END__

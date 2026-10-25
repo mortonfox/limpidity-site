@@ -16,8 +16,8 @@ Metrics/MethodLength:
 # Metrics/PerceivedComplexity:
 #   Enabled: false
 
-# Style/BlockDelimiters:
-#   Enabled: false
+Style/BlockDelimiters:
+  Enabled: false
 # Style/HashSyntax:
 #   EnforcedShorthandSyntax: either
 # Style/SuperArguments:

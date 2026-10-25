@@ -7,7 +7,7 @@ require 'fastimage'
 
 EMAIL = 'morton@mortonfox.com'
 
-def build_page(pagename:, title:, headinsert: '', frontpage: false, content_parms: {})
+def build_page(pagename:, title:, outfile: nil, headinsert: '', frontpage: false, content_parms: {})
   content = ERB.new(File.read("#{pagename}.erb")).result_with_hash(content_parms)
 
   parms = {
@@ -20,7 +20,8 @@ def build_page(pagename:, title:, headinsert: '', frontpage: false, content_parm
 
   page = ERB.new(File.read('template.erb'))
   res = page.result_with_hash(parms)
-  File.write("pages/#{pagename}.htm", res)
+  outfile = "pages/#{pagename}.htm" unless outfile
+  File.write(outfile, res)
 end
 
 def get_image_size(fname)
@@ -55,5 +56,45 @@ build_page(pagename: 'about', title: 'About Limpidity')
 build_page(pagename: 'inprint', title: 'Limpidity in print')
 build_page(pagename: 'links', title: 'Limpidity: Links')
 build_page(pagename: 'contact', title: 'Limpidity: Contact Info')
+
+current, archive = parse_data
+low = archive.map { |v| v[0] }.min
+high = archive.map { |v| v[0] }.max
+
+archive.each { |(num, title)|
+  headinsert = ''
+
+  goleft = "&nbsp;";
+  if num > low
+    prev = num - 1
+    goleft = "<a href=\"show#{prev}.htm\">Previous</a>";
+    headinsert += "<link rel=\"Prev\" href=\"show#{prev}.htm\" title=\"Previous Strip\" />\n";
+  end
+
+  goright = "&nbsp;";
+  if num < high
+    nnext = num + 1;
+    goright = "<a href=\"show#{nnext}.htm\">Next</a>"
+    headinsert += "<link rel=\"Next\" href=\"show#{nnext}.htm\" title=\"Next Strip\" />\n"
+  end
+
+  fname = sprintf('strips/limps%02d.gif', num)
+  parms = {
+    num:,
+    title:,
+    fname:,
+    imgsize: get_image_size("pages/#{fname}"),
+    goleft:,
+    goright:
+  }
+
+  build_page(
+    pagename: 'show',
+    title: "Limpidity ##{num}: #{title}",
+    outfile: "pages/show#{num}.htm",
+    headinsert:,
+    content_parms: parms
+  )
+}
 
 __END__

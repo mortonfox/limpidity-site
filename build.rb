@@ -22,5 +22,6 @@ end
 build_page('about', '', 'About Limpidity', false, false)
 build_page('inprint', '', 'Limpidity in print', false, false)
 build_page('links', '', 'Limpidity: Links', false, false)
+build_page('contact', '', 'Limpidity: Contact Info', false, false)
 
 __END__

@@ -1,0 +1,21 @@
+GEM
+  remote: https://gem.coop/
+  specs:
+    fastimage (2.4.3)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  fastimage
+
+CHECKSUMS
+  bundler (4.1.0.beta2) sha256=ffd80c244e3c080cbc403b194e7b386668c69275561f81b7a801f08772a6e2d6
+  fastimage (2.4.3) sha256=304457e3c35bfdaefda3f1dacab2222a96b230b8ce6977b6b54748c1cc7ec539
+
+RUBY VERSION
+  ruby 4.0.7
+
+BUNDLED WITH
+  4.1.0.beta2

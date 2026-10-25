@@ -1,0 +1,44 @@
+body {
+    background: #ffe none;
+    color: #000;
+    font: normal 14px Arial, Helvetica, sans-serif;
+}
+
+a:link { color: #00f; background: transparent; }
+a:visited { color: #808; background: transparent; }
+a:active { color: #f00; background: transparent; }
+
+#addrblock { font-size: 12px; }
+
+#navbar { font-size: 18px; }
+#navbar table { color: #000; background: #cff none; }
+#navbar a { text-decoration: none; }
+#navbar a:hover { text-decoration: underline; }
+
+#frontnav { width: 700px; margin: 0 auto; }
+#frontnav tr { text-align: center; }
+
+.frontstrip { margin-bottom: 10px; }
+
+#sitename { font-size: 18px; margin-bottom: 0; }
+#sitenet { font-size: 12px; margin-top: 0; }
+#breakout { font-size: 12px; margin-bottom: 10px; }
+
+.striptitle { font-size: 18px; margin: 10px 0; }
+
+#nextprev { margin: 0 auto; width: 750px; }
+
+#cast p { margin: 14px 36px; }
+
+.codeblock { 
+    margin: 14px 36px; 
+    white-space: pre; 
+    font: normal 14px/18px "Lucida Console", "Courier New", Courier, monospace;
+}
+
+#ad {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* The End */

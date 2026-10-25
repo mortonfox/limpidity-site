@@ -1,0 +1,8 @@
+<h1 align="center">Limpidity Archives</h1>
+
+<p align="center">
+
+  <% archive.each { |(num, title)| %>
+    <a href="show<%= num %>.htm">#<%= num %>: <%= title %></a><br />
+  <% } %>
+</p>

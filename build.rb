@@ -61,6 +61,8 @@ current, archive = parse_data
 low = archive.map { |v| v[0] }.min
 high = archive.map { |v| v[0] }.max
 
+build_page(pagename: 'archives', title: 'Limpidity: Archives', content_parms: { archive: })
+
 archive.each { |(num, title)|
   headinsert = ''
 

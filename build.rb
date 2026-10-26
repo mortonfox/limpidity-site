@@ -26,7 +26,7 @@ end
 
 def get_image_size(fname)
   w, h = FastImage.size(fname)
-  "width-\"#{w}\" height=\"#{h}\""
+  "width=\"#{w}\" height=\"#{h}\""
 end
 
 def parse_data
@@ -49,9 +49,6 @@ def parse_data
   [current, archive]
 end
 
-# puts get_image_size('pages/img/gwally.gif')
-# pp parse_data
-
 build_page(pagename: 'about', title: 'About Limpidity')
 build_page(pagename: 'inprint', title: 'Limpidity in print')
 build_page(pagename: 'links', title: 'Limpidity: Links')
@@ -67,16 +64,16 @@ archive.each { |(num, title)|
 
   goleft = '&nbsp;'
   if num > low
-    prev = num - 1
-    goleft = "<a href=\"show#{prev}.htm\">Previous</a>"
-    headinsert += "<link rel=\"Prev\" href=\"show#{prev}.htm\" title=\"Previous Strip\" />\n"
+    link = "show#{num - 1}.htm"
+    goleft = "<a href=\"#{link}\">Previous</a>"
+    headinsert += "<link rel=\"Prev\" href=\"#{link}\" title=\"Previous Strip\" />\n"
   end
 
   goright = '&nbsp;'
   if num < high
-    nnext = num + 1
-    goright = "<a href=\"show#{nnext}.htm\">Next</a>"
-    headinsert += "<link rel=\"Next\" href=\"show#{nnext}.htm\" title=\"Next Strip\" />\n"
+    link = "show#{num + 1}.htm"
+    goright = "<a href=\"#{link}\">Next</a>"
+    headinsert += "<link rel=\"Next\" href=\"#{link}\" title=\"Next Strip\" />\n"
   end
 
   fname = format('strips/limps%02d.gif', num)

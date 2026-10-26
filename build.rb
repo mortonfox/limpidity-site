@@ -53,8 +53,8 @@ end
 build_page(pagename: 'about', title: 'About Limpidity')
 build_page(pagename: 'inprint', title: 'Limpidity in print')
 build_page(pagename: 'links', title: 'Limpidity: Links')
-build_page(pagename: 'contact', title: 'Limpidity: Contact Info')
-build_page(pagename: 'copyright', title: 'Limpidity: Copyright Information')
+build_page(pagename: 'contact', title: 'Limpidity: Contact Info', content_parms: { email: EMAIL })
+build_page(pagename: 'copyright', title: 'Limpidity: Copyright Information', content_parms: { email: EMAIL })
 
 current, archive = parse_data
 low, high = archive.map { |v| v[0] }.minmax
@@ -68,7 +68,9 @@ build_page(
 )
 
 content = ERB.new(File.read('feed.erb')).result_with_hash(
-  archive:, get_image_size: method(:get_image_size).to_proc
+  archive:,
+  email: EMAIL,
+  get_image_size: method(:get_image_size).to_proc
 )
 File.write("#{OUTDIR}/feed.xml", content)
 

@@ -6,7 +6,7 @@
 <title>Webcomics: Limpidity</title>
 <description>A webcomic about a fox and a hare living in modern suburbia.</description>
 <link>http://www.limpidity.com</link>
-<managingEditor>morton@mortonfox.com</managingEditor>
+<managingEditor><%= email %></managingEditor>
 
 <% archive.first(15).each { |num, title|
     fname = format('strips/limps%02d.gif', num)

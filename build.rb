@@ -6,6 +6,7 @@ require 'erb'
 require 'fastimage'
 
 EMAIL = 'morton@mortonfox.com'
+OUTDIR = 'docs'
 
 def build_page(pagename:, title:, outfile: nil, headinsert: '', frontpage: false, content_parms: {})
   content = ERB.new(File.read("#{pagename}.erb")).result_with_hash(content_parms)
@@ -20,7 +21,7 @@ def build_page(pagename:, title:, outfile: nil, headinsert: '', frontpage: false
 
   page = ERB.new(File.read('template.erb'))
   res = page.result_with_hash(parms)
-  outfile ||= "pages/#{pagename}.htm"
+  outfile ||= "#{OUTDIR}/#{pagename}.htm"
   File.write(outfile, res)
 end
 
@@ -66,7 +67,7 @@ build_page(
 content = ERB.new(File.read('feed.erb')).result_with_hash(
   archive:, get_image_size: method(:get_image_size).to_proc
 )
-File.write('pages/feed.xml', content)
+File.write("#{OUTDIR}/feed.xml", content)
 
 archive.each { |(num, title)|
   headinsert = ''
@@ -90,7 +91,7 @@ archive.each { |(num, title)|
     num:,
     title:,
     fname:,
-    imgsize: get_image_size("pages/#{fname}"),
+    imgsize: get_image_size("#{OUTDIR}/#{fname}"),
     goleft:,
     goright:
   }
@@ -98,7 +99,7 @@ archive.each { |(num, title)|
   build_page(
     pagename: 'show',
     title: "Limpidity ##{num}: #{title}",
-    outfile: "pages/show#{num}.htm",
+    outfile: "#{OUTDIR}/show#{num}.htm",
     headinsert:,
     content_parms: parms
   )

@@ -60,7 +60,9 @@ low, high = archive.map { |v| v[0] }.minmax
 
 build_page(pagename: 'archives', title: 'Limpidity: Archives', content_parms: { archive: })
 build_page(
-  pagename: 'index', title: 'Limpidity, the comic strip',
+  pagename: 'index',
+  title: 'Limpidity, the comic strip',
+  frontpage: true,
   content_parms: { current:, get_image_size: method(:get_image_size).to_proc }
 )
 

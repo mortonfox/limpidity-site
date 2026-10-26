@@ -63,6 +63,11 @@ build_page(
   content_parms: { current:, get_image_size: method(:get_image_size).to_proc }
 )
 
+content = ERB.new(File.read('feed.erb')).result_with_hash(
+  archive:, get_image_size: method(:get_image_size).to_proc
+)
+File.write('pages/feed.xml', content)
+
 archive.each { |(num, title)|
   headinsert = ''
 

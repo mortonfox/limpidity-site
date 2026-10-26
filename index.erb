@@ -1,0 +1,24 @@
+<table align="center">
+
+  <% current.each { |(num, title)|
+    fname = format('strips/limps%02d.gif', num)
+    imgsize = get_image_size.call(fname)
+%>
+
+<tr>
+<td>
+
+  <p class="striptitle">#<%= num %>: <%= title %></p>
+
+  <p class="frontstrip"><a href="show<%= num %>.htm"><img src="<%= fname %>" <%= imgsize %> border="0" alt="Limpidity #<%= num %>: <%= title %>" /></a></p>
+
+</td>
+</tr>
+
+  <% } %>
+
+</table>
+
+<p align="center">Got LiveJournal? Watch <a href="http://www.livejournal.com/community/limpidity/info"><img src="img/community.gif" alt="community info for limpidity on www.livejournal.com" style="vertical-align: bottom;" width="16" height="16" border="0" /></a><a href="http://www.livejournal.com/community/limpidity/" title="limpidity on www.livejournal.com"><b>limpidity</b></a> for updates.</p>
+
+<p align="center"><a href="feed.htm" title="RSS feed"><img src="img/rssicon.gif" width="36" height="14" border="0" alt="RSS Feed" /></a></p>

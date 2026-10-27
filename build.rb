@@ -21,7 +21,7 @@ def build_page(pagename:, title:, outfile: nil, headinsert: '', frontpage: false
 
   page = ERB.new(File.read('template.erb'))
   res = page.result_with_hash(parms)
-  outfile ||= "#{OUTDIR}/#{pagename}.htm"
+  outfile ||= "#{OUTDIR}/#{pagename}.html"
   File.write(outfile, res)
 end
 
@@ -79,14 +79,14 @@ archive.each { |(num, title)|
 
   goleft = '&nbsp;'
   if num > low
-    link = "show#{num - 1}.htm"
+    link = "show#{num - 1}.html"
     goleft = "<a href=\"#{link}\">Previous</a>"
     headinsert += "<link rel=\"Prev\" href=\"#{link}\" title=\"Previous Strip\" />\n"
   end
 
   goright = '&nbsp;'
   if num < high
-    link = "show#{num + 1}.htm"
+    link = "show#{num + 1}.html"
     goright = "<a href=\"#{link}\">Next</a>"
     headinsert += "<link rel=\"Next\" href=\"#{link}\" title=\"Next Strip\" />\n"
   end
@@ -104,7 +104,7 @@ archive.each { |(num, title)|
   build_page(
     pagename: 'show',
     title: "Limpidity ##{num}: #{title}",
-    outfile: "#{OUTDIR}/show#{num}.htm",
+    outfile: "#{OUTDIR}/show#{num}.html",
     headinsert:,
     content_parms: parms
   )
